@@ -32,7 +32,6 @@ public class ModelLoader {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboID);
 		IntBuffer buffer = createBuffer(indices);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 	
 	private static void storeInAttribute(int attribNumber, int coordSize, float[] data) {
