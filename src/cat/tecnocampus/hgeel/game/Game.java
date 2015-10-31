@@ -1,7 +1,9 @@
 package cat.tecnocampus.hgeel.game;
 
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
+import cat.tecnocampus.hgeel.engine.handlers.Display;
 import cat.tecnocampus.hgeel.entity.Entity;
 import cat.tecnocampus.hgeel.models.ModelLoader;
 import cat.tecnocampus.hgeel.render.ModelRenderer;
@@ -11,6 +13,13 @@ public class Game {
 	
 	Entity entity;
 	MainShader shader;
+	
+	Matrix4f viewMatrix = new Matrix4f().perspective(
+			90f,
+			(float) Display.WIDTH / Display.HEIGHT, 
+			0.1f, 
+			100f
+	);
 	
 	int[] indices = new int[] {
 			0, 1, 3, 3, 1, 2
@@ -25,6 +34,7 @@ public class Game {
 	
 	public void init() {
 		entity = new Entity(ModelLoader.load(indices, vertices));
+		entity.setPosition(new Vector3f(0, 0, -1));
 		shader = new MainShader();
 	}
 	
@@ -34,6 +44,7 @@ public class Game {
 	
 	public void render() {
 		shader.start();
+		shader.setViewMatrix(viewMatrix);
 		ModelRenderer.render(entity, shader);
 		shader.stop();
 	}

@@ -12,6 +12,7 @@ public class MainShader extends ShaderProgram {
 	private static final String fragmentFile = "res/shaders/main.f";
 	
 	private int loc_transform;
+	private int loc_view;
 	
 	FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(4*4);
 
@@ -27,12 +28,19 @@ public class MainShader extends ShaderProgram {
 	@Override
 	protected void getUniformLocations() {
 		loc_transform = GL20.glGetUniformLocation(this.programID, "transform");
+		loc_view = GL20.glGetUniformLocation(this.programID, "view");
 	}
 	
 	public void setTransformMatrix(Matrix4f matrix) {
 		matrixBuffer.clear();
 		matrix.get(matrixBuffer);
 		GL20.glUniformMatrix4fv(loc_transform, false, matrixBuffer);
+	}
+	
+	public void setViewMatrix(Matrix4f matrix) {
+		matrixBuffer.clear();
+		matrix.get(matrixBuffer);
+		GL20.glUniformMatrix4fv(loc_view, false, matrixBuffer);
 	}
 
 }
