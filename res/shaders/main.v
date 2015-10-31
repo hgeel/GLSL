@@ -10,5 +10,5 @@ uniform mat4 camera;
 
 void main(void) {
 	gl_Position = view * camera * transform * vec4(position, 1.0);
-	color = vec3(position.x + 0.5, 1.0, position.y + 0.5);
+	color = vec3(position.x + 0.5, position.y + 0.5, position.z + 0.5);
 }

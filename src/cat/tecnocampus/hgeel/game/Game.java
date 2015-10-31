@@ -25,14 +25,26 @@ public class Game {
 	);
 	
 	int[] indices = new int[] {
-			0, 1, 3, 3, 1, 2
+			0, 1, 2, 2, 0, 3,	//Front
+			4, 5, 7, 7, 5, 6,	//Back
+			3, 2, 6, 6, 2, 7,	//Right
+			4, 5, 1, 1, 4, 0,	//Left
+			1, 5, 6, 6, 1, 2,	//Top
+			4, 0, 3, 3, 4, 5	//Bottom
 	};
 	
 	float[] vertices = new float[] {
-			-0.5f, 0.5f, 0f,
-			-0.5f, -0.5f, 0f,
-			0.5f, -0.5f, 0f,
-			0.5f, 0.5f, 0f
+			//Front clockwise
+			-0.5f, -0.5f, -0.5f,
+			-0.5f, 0.5f, -0.5f,
+			0.5f, 0.5f, -0.5f,
+			0.5f, -0.5f, -0.5f,
+			
+			//Back clockwise
+			-0.5f, -0.5f, 0.5f,
+			-0.5f, 0.5f, 0.5f,
+			0.5f, 0.5f, 0.5f,
+			0.5f, -0.5f, 0.5f,
 	};
 	
 	public void init() {

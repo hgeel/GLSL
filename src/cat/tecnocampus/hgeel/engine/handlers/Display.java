@@ -54,7 +54,8 @@ public class Display {
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
 		GL.createCapabilities();
-		glClearColor(1f, 0f, 0f, 1f);
+		glClearColor(0f, 0f, 0f, 0f);
+		glEnable(GL_DEPTH_TEST);
 		
 	}
 	
