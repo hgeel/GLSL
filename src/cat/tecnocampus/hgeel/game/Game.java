@@ -25,12 +25,11 @@ public class Game {
 	
 	public void init() {
 		entity = new Entity(ModelLoader.load(indices, vertices));
-		entity.setPosition(new Vector3f(-1, 0, 0));
 		shader = new MainShader();
 	}
 	
 	public void update() {
-		
+		entity.rotate(new Vector3f(0, 0.5f, 0));
 	}
 	
 	public void render() {

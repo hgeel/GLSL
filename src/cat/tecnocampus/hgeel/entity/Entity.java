@@ -55,9 +55,9 @@ public class Entity {
 	public Matrix4f getTransformMatrix() {
 		return new Matrix4f().identity()
 				.translate(position)
-				.rotateX(rotation.x)
-				.rotateY(rotation.y)
-				.rotateZ(rotation.z)
+				.rotateX((float) Math.toRadians(rotation.x))
+				.rotateY((float) Math.toRadians(rotation.y))
+				.rotateZ((float) Math.toRadians(rotation.z))
 				.scale(scale);
 	}
 

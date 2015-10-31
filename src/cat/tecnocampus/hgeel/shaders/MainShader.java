@@ -27,18 +27,12 @@ public class MainShader extends ShaderProgram {
 	@Override
 	protected void getUniformLocations() {
 		loc_transform = GL20.glGetUniformLocation(this.programID, "transform");
-		System.out.println("Transform Location: " + loc_transform);
 	}
 	
 	public void setTransformMatrix(Matrix4f matrix) {
 		matrixBuffer.clear();
 		matrix.get(matrixBuffer);
 		GL20.glUniformMatrix4fv(loc_transform, false, matrixBuffer);
-		System.out.println("Loaded transform to: " + loc_transform);
-		matrixBuffer.position(0);
-		for(int i = 0; i < matrixBuffer.capacity(); i++) {
-			System.out.println(matrixBuffer.get());
-		}
 	}
 
 }
