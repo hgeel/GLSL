@@ -13,6 +13,7 @@ public class MainShader extends ShaderProgram {
 	
 	private int loc_transform;
 	private int loc_view;
+	private int loc_camera;
 	
 	FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(4*4);
 
@@ -29,12 +30,19 @@ public class MainShader extends ShaderProgram {
 	protected void getUniformLocations() {
 		loc_transform = GL20.glGetUniformLocation(this.programID, "transform");
 		loc_view = GL20.glGetUniformLocation(this.programID, "view");
+		loc_camera = GL20.glGetUniformLocation(this.programID, "camera");
 	}
 	
 	public void setTransformMatrix(Matrix4f matrix) {
 		matrixBuffer.clear();
 		matrix.get(matrixBuffer);
 		GL20.glUniformMatrix4fv(loc_transform, false, matrixBuffer);
+	}
+	
+	public void setCameraMatrix(Matrix4f matrix) {
+		matrixBuffer.clear();
+		matrix.get(matrixBuffer);
+		GL20.glUniformMatrix4fv(loc_camera, false, matrixBuffer);
 	}
 	
 	public void setViewMatrix(Matrix4f matrix) {

@@ -8,10 +8,12 @@ import cat.tecnocampus.hgeel.entity.Entity;
 import cat.tecnocampus.hgeel.models.ModelLoader;
 import cat.tecnocampus.hgeel.render.ModelRenderer;
 import cat.tecnocampus.hgeel.shaders.MainShader;
+import cat.tecnocampus.hgeel.view.Camera;
 
 public class Game {
 	
 	Entity entity;
+	Camera camera;
 	MainShader shader;
 	
 	Matrix4f viewMatrix = new Matrix4f().perspective(
@@ -35,16 +37,19 @@ public class Game {
 	public void init() {
 		entity = new Entity(ModelLoader.load(indices, vertices));
 		entity.setPosition(new Vector3f(0, 0, -1));
+		camera = new Camera();
 		shader = new MainShader();
 	}
 	
 	public void update() {
+		camera.update();
 		entity.rotate(new Vector3f(0, 0.5f, 0));
 	}
 	
 	public void render() {
 		shader.start();
 		shader.setViewMatrix(viewMatrix);
+		shader.setCameraMatrix(camera.getViewMatrix());
 		ModelRenderer.render(entity, shader);
 		shader.stop();
 	}

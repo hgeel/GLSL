@@ -7,9 +7,10 @@ import java.nio.ByteBuffer;
 
 import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL;
+
+import cat.tecnocampus.hgeel.input.Keyboard;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -21,7 +22,6 @@ public class Display {
 	public static final int HEIGHT = 720;
 	
 	private static GLFWErrorCallback errorCallback;
-	private static GLFWKeyCallback keyCallback;
 	
 	public static void create() {
 		
@@ -38,13 +38,7 @@ public class Display {
 		if(window == NULL)
 			throw new RuntimeException("Could not create GLFW window.");
 		
-		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if(key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
-					glfwSetWindowShouldClose(window, GL_TRUE);
-			}
-		});
+		glfwSetKeyCallback(window, new Keyboard());
 		
 		ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		glfwSetWindowPos(
@@ -68,10 +62,6 @@ public class Display {
 	
 	public static GLFWErrorCallback getErrorCallback() {
 		return errorCallback;
-	}
-
-	public static GLFWKeyCallback getKeyCallback() {
-		return keyCallback;
 	}
 	
 }
