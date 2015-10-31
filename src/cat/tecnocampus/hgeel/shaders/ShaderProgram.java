@@ -14,7 +14,7 @@ import org.lwjgl.BufferUtils;
 
 public abstract class ShaderProgram {
 	
-	private int programID;
+	protected int programID;
 	private int vertexID;
 	private int fragmentID;
 	

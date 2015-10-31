@@ -1,13 +1,15 @@
 package cat.tecnocampus.hgeel.game;
 
-import cat.tecnocampus.hgeel.models.Mesh;
+import org.joml.Vector3f;
+
+import cat.tecnocampus.hgeel.entity.Entity;
 import cat.tecnocampus.hgeel.models.ModelLoader;
 import cat.tecnocampus.hgeel.render.ModelRenderer;
 import cat.tecnocampus.hgeel.shaders.MainShader;
 
 public class Game {
 	
-	Mesh mesh;
+	Entity entity;
 	MainShader shader;
 	
 	int[] indices = new int[] {
@@ -22,8 +24,9 @@ public class Game {
 	};
 	
 	public void init() {
+		entity = new Entity(ModelLoader.load(indices, vertices));
+		entity.setPosition(new Vector3f(-1, 0, 0));
 		shader = new MainShader();
-		mesh = ModelLoader.load(indices, vertices);
 	}
 	
 	public void update() {
@@ -32,7 +35,7 @@ public class Game {
 	
 	public void render() {
 		shader.start();
-		ModelRenderer.render(mesh);
+		ModelRenderer.render(entity, shader);
 		shader.stop();
 	}
 	
