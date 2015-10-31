@@ -11,6 +11,7 @@ import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL;
 
 import cat.tecnocampus.hgeel.input.Keyboard;
+import cat.tecnocampus.hgeel.input.Mouse;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -39,6 +40,8 @@ public class Display {
 			throw new RuntimeException("Could not create GLFW window.");
 		
 		glfwSetKeyCallback(window, new Keyboard());
+		glfwSetCursorPos(window, 0, 0);
+		glfwSetCursorPosCallback(window, new Mouse());
 		
 		ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		glfwSetWindowPos(

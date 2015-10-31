@@ -5,6 +5,7 @@ import org.joml.Vector3f;
 
 import cat.tecnocampus.hgeel.engine.handlers.Display;
 import cat.tecnocampus.hgeel.entity.Entity;
+import cat.tecnocampus.hgeel.input.Mouse;
 import cat.tecnocampus.hgeel.models.ModelLoader;
 import cat.tecnocampus.hgeel.render.ModelRenderer;
 import cat.tecnocampus.hgeel.shaders.MainShader;
@@ -17,7 +18,7 @@ public class Game {
 	MainShader shader;
 	
 	Matrix4f viewMatrix = new Matrix4f().perspective(
-			90f,
+			80f,
 			(float) Display.WIDTH / Display.HEIGHT, 
 			0.1f, 
 			100f
@@ -35,6 +36,7 @@ public class Game {
 	};
 	
 	public void init() {
+		Mouse.hide();
 		entity = new Entity(ModelLoader.load(indices, vertices));
 		entity.setPosition(new Vector3f(0, 0, -1));
 		camera = new Camera();
@@ -42,8 +44,8 @@ public class Game {
 	}
 	
 	public void update() {
+		Mouse.update();
 		camera.update();
-		entity.rotate(new Vector3f(0, 0.5f, 0));
 	}
 	
 	public void render() {
@@ -55,6 +57,7 @@ public class Game {
 	}
 	
 	public void clean() {
+		Mouse.show();
 		shader.delete();
 		ModelLoader.cleanUp();
 	}
